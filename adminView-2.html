@@ -1,87 +1,207 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">Navbar</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Features</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Pricing</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-    <div class="row">
-        <div class="col-sm-6 mb-3 mb-sm-0">
-          <div class="card text-bg-primary mb-3">
-            <div class="card-body">
-              <h5 class="card-title">PENDING COLLECTIONS</h5>
-             <p class="display-6">280</p> <p class="card-text"> Pending Collections.</p>
-              
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-6">
-          <div class="card text-bg-primary mb-3">
-            <div class="card-body">
-              <h5 class="card-title">APPROVED COLLECTIONS</h5>
-              <p class="display-6">210</p><p class="card-text"> Approved Collections</p>
-            
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-6 mb-3 mb-sm-0">
-          <div class="card text-bg-primary mb-3">
-            <div class="card-body">
-              <h5 class="card-title">DRIVERS AVAILABLE</h5>
-              <p class="display-6">540</p><p class="card-text"> Available Drivers.</p>
-            </div>
-          </div>
-        </div>
-       
-      <div class="row">
-        <div class="col-sm-6 mb-3 mb-sm-0">
-          <div class="card text-bg-primary mb-3">
-            <div class="card-body">
-              <h5 class="card-title">DRIVERS RATINGS</h5>
-             <p class="display-6">180</p> <p class="card-text">Users rated the drivers.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-6">
-          <div class="card text-bg-primary mb-3 justify-content-center">
-            <div class="card-body">
-              <h5 class="card-title">PAYMENTS MADE</h5>
-              <p class="display-6">200 </p><p class="card-text">Payments made.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-     
-      
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>ADMIN</title>
+	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="lawyerclient.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz@1,6..96&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/bfaf8a8cc1.js" crossorigin="anonymous"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-  </body>
+</head>
+<body>
+	<input type="checkbox" id="nav-toggle">
+	<div class="sidebar"> 
+	   <div class="sidebar-brand">
+	   	<h2><span class="fa-solid fa-scale-balanced"></span>CASELINX</h2>
+	   </div>
+
+	   <div class="sidebar-menu">
+	   	<ul>
+	   		<li>
+	   		   <a href="" class="active"><span class="fa-solid fa-globe"></span><span>Dashboard</span></a>
+	   		</li>
+	   		<li>
+	   		   <a href="lawyerclient3.html"><span class="fa-solid fa-user"></span><span>Clients</span></a>
+	   		</li>
+	   		<li>
+	   		   <a href="lawyerclient2.html"><span class="fa-solid fa-user">
+	   		   	</span><span>Lawyers</span></a>
+	   		</li>
+	   		<li>
+	   		   <a href="lawyerclient4.html"><span class="fa-solid fa-link"></span><span>links</span></a>
+	   		</li>
+	   		<li>
+	   		   <a href=""><span class="fa-solid fa-right-from-bracket"></span><span>Log out</span></a>
+	   		</li>
+	   	</ul>
+	   </div>
+	</div>
+ <div class="main-content">
+ 	<header>
+ 		<h2>
+ 			<label for="nav-toggle">
+ 				 <span class="fa-solid fa-bars"></span>
+ 			</label>
+ 			Dashboard
+       </h2>
+       <div class="search-wrapper">
+       <span class="fa-solid fa-magnifying-glass"></span>
+       <input type="search" placeholder="search here">
+       </div>
+           <div class="user-wrapper">
+           	<img src="alton.jpg" width="40px" height="40px"alt="">
+           	<div>
+           		<h4>John Doe</h4>
+           		<small>Super admin</small>
+           	</div>
+           </div>
+ 	</header>
+         <main>
+         	<div class="cards">
+         		<div class="cards-single">
+         			<div>
+         				<h1>0</h1>
+         				<span>Clients</span>
+         			</div>
+         			<div>
+         				<span class="fa-solid fa-user">
+         				</span>
+         			</div>
+         		</div>
+         		<div class="cards-single">
+         			<div>
+         				<h1>0</h1>
+         				<span>Lawyers</span>
+         			</div>
+         			<div>
+         				<span class="fa-solid fa-gavel">
+         				</span>
+         			</div>
+         		</div>
+
+         		<div class="cards-single">
+         			<div>
+         				<h1>0</h1>
+         				<span>Links</span>
+         			</div>
+         			<div>
+         				<span class="fa-solid fa-link">
+         				</span>
+         			</div>
+         		</div>
+
+         		
+         	</div>
+             <div class="recent-grid">
+               <div class="Links">
+               	<div class="card">
+               		<div class="card-header">
+               			<h3>Recent links</h3>
+               			<button><a href="lawyerclient4.html">See all<span class="fa-solid fa-arrow-right"></span></a></button>
+               		</div>
+               		<div class="card-body">
+               			<table width="100%">
+               				<thead>
+               					<tr>
+               						<td>Lawyer</td>
+               						<td>client</td>
+               						<td>status</td>
+               					</tr>
+               				</thead>
+               				<tbody>
+               					<tr>
+               						<td>j.ndile</td>
+               						<td>m.kubo</td>
+               						<td>
+               							<span class="status inprogress"></span>
+               							in progress
+               						</td>
+               					</tr>
+               					<tr>
+               						<td>j.ndile</td>
+               						<td>m.kubo</td>
+               						<td>
+               							<span class="status pending"></span>
+               							pending
+               						</td>
+               					</tr>
+               					<tr>
+               						<td>j.ndile</td>
+               						<td>m.kubo</td>
+               						<td>
+               							<span class="status completed"></span>
+               							completed
+               						</td>
+               						               					
+               				</tr>
+               				</tbody>
+               			</table>
+               		</div>
+               	</div>
+               	
+               </div>
+               <div class="Lawyers">
+               	<div class="card">
+               		<div class="card-header">
+               			<h3>New Lawyers</h3>
+               			<button><a href="lawyerclient2.html">See all<span class="fa-solid fa-arrow-right"></span></a></button>
+               			
+               		</div>
+               	
+               
+               		<div class="card-body">
+
+               			<div class="contact">
+               				<div class="info">
+               				<img src="alton.jpg"width="40px"height="40px"alt="">
+               				<div>
+               					<h4>mike hange</h4>
+               					<small>divorce specialist</small>
+               				</div>
+               			</div>
+               			<div c>
+               				<span class="fa-solid fa-user"></span>
+               				<span class="fa-regular fa-comment"></span>
+               				<span class="fa-solid fa-phone"></span>
+               			</div>
+               </div>
+               <div class="contact">
+               				<div class="info">
+               				<img src="alton.jpg"width="40px"height="40px"alt="">
+               				<div>
+               					<h4>mike hange</h4>
+               					<small>divorce specialist</small>
+               				</div>
+               			</div>
+               			<div>
+               				<span class="fa-solid fa-user"></span>
+               				<span class="fa-regular fa-comment"></span>
+               				<span class="fa-solid fa-phone"></span>
+               			</div>
+               </div>
+
+               <div class="contact">
+               				<div class="info">
+               				<img src="alton.jpg"width="40px"height="40px"alt="">
+               				<div>
+               					<h4>mike hange</h4>
+               					<small>divorce specialist</small>
+               				</div>
+               			</div>
+               			<div>
+               				<span class="fa-solid fa-user"></span>
+               				<span class="fa-regular fa-comment"></span>
+               				<span class="fa-solid fa-phone"></span>
+               			</div>
+               </div>
+           </div>
+       </div>
+             </div>
+         </main>
+ </div>
+</body>
 </html>

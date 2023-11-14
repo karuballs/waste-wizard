@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html style="height: 100%;">
+<head>
+  <title>Patient Page</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+    
+    .container {
+      display: flex;
+      flex-direction: row;
+      height: 100%;
+    }
+    
+    .sidebar {
+      flex: 0 0 300px;
+      background-color: #f8f9fa;
+      padding: 20px;
+    }
+    
+    .content {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    h1 {
+      margin: 0 0 30px 0;
+    }
+
+    #map {
+      width: 100%;
+      height: 100%;
+      border: 1px solid #d3d3d3;
+      border-radius: 8px;
+    }
+    
+    .button-container {
+      margin-top: 30px;
+    }
+
+    #emergency-button {
+      padding: 10px 20px;
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      font-size: 18px;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
+      width: 100%;
+    }
+
+    #emergency-button:hover {
+      background-color: #c82333;
+    }
+
+    .dashboard h2 {
+      margin: 5px 0;
+    }
+
+    #status {
+      font-size: 24px;
+      color: #333;
+      font-weight: bold;
+    }
+
+    #eta {
+      font-size: 18px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="sidebar">
+      <h1>Patient Page</h1>
+
+      <div class="dashboard">
+        <h2>Status: <span id="status">Waiting for response</span></h2>
+        <h2>ETA: <span id="eta">-</span></h2>
+      </div>
+
+      <div class="button-container">
+        <button id="emergency-button">Request Ambulance</button>
+      </div>
+    </div>
+
+    <div class="content">
+      <div id="map"></div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.2.0/socket.io.js"></script>
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  <script>
+    const map = L.map('map').setView([0, 0], 13);
+    const ambulanceMarkers = [];
+    let patientMarker;
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    const socket = io();
+
+    function updatePatientMarker(latitude, longitude) {
+      if (patientMarker) {
+        patientMarker.setLatLng([latitude, longitude]);
+      } else {
+        patientMarker = L.marker([latitude, longitude]).addTo(map);
+      }
+    }
+
+    function updateAmbulanceMarkers(ambulances) {
+      ambulanceMarkers.forEach(marker => {
+        marker.remove();
+      });
+      ambulanceMarkers.length = 0;
+
+      ambulances.forEach(ambulance => {
+        const { id, location } = ambulance;
+        const marker = L.marker([location.latitude, location.longitude]).addTo(map);
+        marker.options.id = id; // store the ambulance id in the marker options
+        ambulanceMarkers.push(marker);
+      });
+    }
+
+    function updateDashboard(status, eta) {
+      document.getElementById('status').textContent = status;
+      document.getElementById('eta').textContent = eta;
+    }
+
+    function requestAmbulance() {
+      console.log('Requesting ambulance...');
+      navigator.geolocation.getCurrentPosition(pos => {
+        const latitude = pos.coords.latitude;
+        const longitude = pos.coords.longitude;
+
+        const requestData = {
+          latitude,
+          longitude
+        };
+
+        socket.emit('patient:request', requestData);
+      });
+    }
+
+    // Initialize the map with the user's current location
+    navigator.geolocation.getCurrentPosition(pos => {
+      const latitude = pos.coords.latitude;
+      const longitude = pos.coords.longitude;
+      map.setView([latitude, longitude], 13);
+      updatePatientMarker(latitude, longitude);
+    });
+
+    socket.on('connect', () => {
+      console.log('Connected to server');
+    });
+
+    socket.on('ambulance:update', data => {
+      console.log('Ambulance data updated:', data);
+      updateAmbulanceMarkers(data.ambulances);
+    });
+
+    socket.on('emergencyRequestAccepted', data => {
+  console.log('Emergency request accepted:', data);
+  updateDashboard('Ambulance en route', 'ETA: Calculating...');
+});
+
+    socket.on('ambulance:locationUpdate', data => {
+      console.log(`Received ambulance location update for ${data.id}:, data.location`);
+      ambulanceMarkers.forEach(marker => {
+        if (marker.options.id === data.id) {
+          marker.setLatLng([data.location.latitude, data.location.longitude]);
+        }
+      });
+    });
+
+    socket.on('patient:locationUpdate', data => {
+      console.log('Received patient location update:', data.location);
+      updatePatientMarker(data.location.latitude, data.location.longitude);
+    });
+
+    document.getElementById('emergency-button').addEventListener('click', () => {
+      requestAmbulance();
+    });
+  </script>
+</body>
+</html>
